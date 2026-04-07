@@ -1,23 +1,35 @@
-name: whatsapp-tauri
+name: whatsapp-unofficial
 base: core22
 version: "1.0.0"
+title: WhatsApp (Unofficial)
 summary: WhatsApp Desktop for Linux
 description: |
   Cliente WhatsApp para Linux construído com Tauri v2.
-  Carrega o WhatsApp Web em um WebView nativo com suporte completo
-  a áudio (chamadas, mensagens de voz) via PipeWire, system tray,
-  notificações de desktop e sessão persistente.
+  Suporte completo a áudio (chamadas, mensagens de voz) via PipeWire,
+  system tray, notificações de desktop e sessão persistente.
+  Carrega o WhatsApp Web oficial sem API não autorizada.
+license: MIT
+contact: https://github.com/lucasbrito-wdt/whatsapp-unofficial/issues
+website: https://github.com/lucasbrito-wdt/whatsapp-unofficial
 
 grade: stable
 confinement: strict
 
 architectures:
-  - build-on: amd64
+  - build-on: [amd64]
+    build-for: [amd64]
+
+layout:
+  /usr/lib/x86_64-linux-gnu/webkit2gtk-4.1:
+    bind: $SNAP/usr/lib/x86_64-linux-gnu/webkit2gtk-4.1
 
 apps:
-  whatsapp-tauri:
-    command: usr/bin/whatsapp-tauri
-    desktop: usr/share/applications/whatsapp-tauri.desktop
+  whatsapp-unofficial:
+    command: usr/bin/app
+    desktop: usr/share/applications/WhatsApp.desktop
+    environment:
+      WEBKIT_DISABLE_COMPOSITING_MODE: "1"
+      LD_LIBRARY_PATH: $SNAP/usr/lib/x86_64-linux-gnu:$SNAP/usr/lib:$LD_LIBRARY_PATH
     plugs:
       - desktop
       - desktop-legacy
@@ -30,34 +42,56 @@ apps:
       - audio-record
       - camera
       - home
-      - removable-media
       - pulseaudio
+      - browser-support
+      - gsettings
 
 parts:
-  whatsapp-tauri:
+  whatsapp-unofficial:
     plugin: dump
-    source: .
-    source-type: local
-    override-build: |
-      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-      source "$HOME/.cargo/env"
-      npm install
-      npm run tauri build
-      cp src-tauri/target/release/whatsapp-tauri $SNAPCRAFT_PART_INSTALL/usr/bin/
-    build-packages:
-      - libwebkit2gtk-4.1-dev
-      - libssl-dev
-      - libayatana-appindicator3-dev
-      - librsvg2-dev
-      - patchelf
-      - libgstreamer1.0-dev
-      - gstreamer1.0-pipewire
-      - nodejs
-      - npm
+    source: src-tauri/target/release/bundle/deb/WhatsApp_1.0.0_amd64.deb
+    source-type: deb
     stage-packages:
       - libwebkit2gtk-4.1-0
-      - libssl3
+      - libjavascriptcoregtk-4.1-0
       - libayatana-appindicator3-1
       - gstreamer1.0-pipewire
       - gstreamer1.0-plugins-base
       - gstreamer1.0-plugins-good
+      - libgstreamer1.0-0
+      - libgstreamer-gl1.0-0
+      - libgtk-3-0
+      - libgdk-pixbuf-2.0-0
+      - libsoup-3.0-0
+      - libsecret-1-0
+      - libenchant-2-2
+      - libhyphen0
+      - liblcms2-2
+      - libwoff1
+      - libicu74
+      - libmanette-0.2-0
+      - libunwind8
+      - libgudev-1.0-0
+      - libnghttp2-14
+      - libatomic1
+      - libegl1
+      - libgl1
+      - libepoxy0
+      - libevdev2
+      - libgbm1
+      - libpsl5t64
+      - libxkbcommon0
+      - libxcomposite1
+      - libxcursor1
+      - libxdamage1
+      - libxfixes3
+      - libxi6
+      - libxinerama1
+      - libxrandr2
+      - libxrender1
+      - libxcb1
+      - libxcb-render0
+      - libxcb-shm0
+      - libwebp7
+      - libxml2
+      - libxslt1.1

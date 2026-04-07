@@ -1,0 +1,115 @@
+assets:
+  build-packages: []
+  build-snaps: []
+  installed-packages: []
+  installed-snaps:
+  - bare=5
+  - core18=2999
+  - core20=2769
+  - core22=2411
+  - core24=1587
+  - gnome-3-28-1804=198
+  - gtk-common-themes=1535
+  - snapcraft=17288
+  - snapd=26382
+  - superproductivity=3415
+  - termius-app=260
+  - whatsapp-desktop-linux=1
+  uname: 'Linux 6.17.0-20-generic #20~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Mar 19
+    01:28:37 UTC 2 x86_64 x86_64 x86_64 GNU/Linux'
+directories: !!set {}
+files: !!set {}
+overlay_hash: 6554e32fa718d54160d0511b36f81458e4cb2357
+part_properties:
+  after: []
+  build-attributes: []
+  build-environment: []
+  build-packages: []
+  build-snaps: []
+  disable-parallel: false
+  organize: {}
+  overlay:
+  - '*'
+  overlay-packages: []
+  overlay-script: null
+  override-build: null
+  override-prime: null
+  override-pull: null
+  override-stage: null
+  permissions: []
+  plugin: dump
+  prime:
+  - '*'
+  source: src-tauri/target/release/bundle/deb/WhatsApp_1.0.0_amd64.deb
+  source-branch: ''
+  source-channel: null
+  source-checksum: ''
+  source-commit: ''
+  source-depth: 0
+  source-subdir: ''
+  source-submodules: null
+  source-tag: ''
+  source-type: deb
+  stage:
+  - '*'
+  stage-packages:
+  - libwebkit2gtk-4.1-0
+  - libjavascriptcoregtk-4.1-0
+  - libayatana-appindicator3-1
+  - gstreamer1.0-pipewire
+  - gstreamer1.0-plugins-base
+  - gstreamer1.0-plugins-good
+  - libgstreamer1.0-0
+  - libgstreamer-gl1.0-0
+  - libgtk-3-0
+  - libgdk-pixbuf-2.0-0
+  - libsoup-3.0-0
+  - libsecret-1-0
+  - libenchant-2-2
+  - libhyphen0
+  - liblcms2-2
+  - libwoff1
+  - libicu74
+  - libmanette-0.2-0
+  - libunwind8
+  - libgudev-1.0-0
+  - libnghttp2-14
+  - libatomic1
+  - libegl1
+  - libgl1
+  - libepoxy0
+  - libevdev2
+  - libgbm1
+  - libpsl5t64
+  - libxkbcommon0
+  - libxcomposite1
+  - libxcursor1
+  - libxdamage1
+  - libxfixes3
+  - libxi6
+  - libxinerama1
+  - libxrandr2
+  - libxrender1
+  - libxcb1
+  - libxcb-render0
+  - libxcb-shm0
+  - libwebp7
+  - libxml2
+  - libxslt1.1
+  stage-snaps: []
+partition: null
+partitions_contents: {}
+project_options:
+  application_name: snapcraft
+  arch_triplet: x86_64-linux-gnu
+  project_vars:
+    grade:
+      part_name: null
+      updated: false
+      value: stable
+    version:
+      part_name: null
+      updated: false
+      value: 1.0.0
+  project_vars_part_name: null
+  target_arch: amd64

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Categories=Network;
+Comment=WhatsApp Desktop for Linux
+Exec=app
+StartupWMClass=app
+Icon=app
+Name=WhatsApp
+Terminal=false
+Type=Application

@@ -1,0 +1,47 @@
+name: whatsapp-unofficial
+title: WhatsApp (Unofficial)
+version: 1.0.0
+summary: WhatsApp Desktop for Linux
+description: |
+  Cliente WhatsApp para Linux construído com Tauri v2.
+  Suporte completo a áudio (chamadas, mensagens de voz) via PipeWire,
+  system tray, notificações de desktop e sessão persistente.
+  Carrega o WhatsApp Web oficial sem API não autorizada.
+license: MIT
+architectures:
+- amd64
+base: core22
+apps:
+  whatsapp-unofficial:
+    command: usr/bin/app
+    plugs:
+    - desktop
+    - desktop-legacy
+    - wayland
+    - x11
+    - opengl
+    - network
+    - network-bind
+    - audio-playback
+    - audio-record
+    - camera
+    - home
+    - pulseaudio
+    - browser-support
+    - gsettings
+    environment:
+      WEBKIT_DISABLE_COMPOSITING_MODE: '1'
+      LD_LIBRARY_PATH: $SNAP/usr/lib/x86_64-linux-gnu:$SNAP/usr/lib:$LD_LIBRARY_PATH
+confinement: strict
+grade: stable
+environment:
+  LD_LIBRARY_PATH: ${SNAP_LIBRARY_PATH}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+  PATH: $SNAP/usr/sbin:$SNAP/usr/bin:$SNAP/sbin:$SNAP/bin:$PATH
+layout:
+  /usr/lib/x86_64-linux-gnu/webkit2gtk-4.1:
+    bind: $SNAP/usr/lib/x86_64-linux-gnu/webkit2gtk-4.1
+links:
+  contact:
+  - https://github.com/lucasbrito-wdt/whatsapp-unofficial/issues
+  website:
+  - https://github.com/lucasbrito-wdt/whatsapp-unofficial

@@ -1,6 +1,6 @@
 use std::fs;
 
-const KEYRING_SERVICE: &str = "com.whatsapp.tauri";
+const KEYRING_SERVICE: &str = "com.whatsapp.unofficial";
 const KEYRING_USER: &str = "session";
 const AUTOSTART_DESKTOP: &str = "[Desktop Entry]
 Type=Application
@@ -37,7 +37,7 @@ pub async fn set_autostart(enabled: bool, app: tauri::AppHandle) -> Result<(), S
     let config_dir = app.path().config_dir()
         .map_err(|e| e.to_string())?;
     let autostart_dir = config_dir.join("autostart");
-    let path = autostart_dir.join("whatsapp-tauri.desktop");
+    let path = autostart_dir.join("whatsapp-unofficial.desktop");
 
     if enabled {
         fs::create_dir_all(&autostart_dir)
