@@ -1,0 +1,26 @@
+# Generated
+dist/
+node_modules/
+
+# Tauri
+src-tauri/target/
+src-tauri/gen/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+docs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.local
+
+# Release artifacts
+*.deb
+*.AppImage

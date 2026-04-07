@@ -1,0 +1,32 @@
+app-id: com.whatsapp.tauri
+runtime: org.gnome.Platform
+runtime-version: "46"
+sdk: org.gnome.Sdk
+command: whatsapp-tauri
+
+finish-args:
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --socket=pulseaudio
+  - --share=network
+  - --device=dri
+  - --device=all
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --filesystem=home
+  - --env=WEBKIT_DISABLE_COMPOSITING_MODE=1
+
+modules:
+  - name: whatsapp-tauri
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 whatsapp-tauri /app/bin/whatsapp-tauri
+      - install -Dm644 com.whatsapp.tauri.desktop /app/share/applications/com.whatsapp.tauri.desktop
+      - install -Dm644 icons/512x512.png /app/share/icons/hicolor/512x512/apps/com.whatsapp.tauri.png
+      - install -Dm644 icons/256x256.png /app/share/icons/hicolor/256x256/apps/com.whatsapp.tauri.png
+      - install -Dm644 icons/128x128.png /app/share/icons/hicolor/128x128/apps/com.whatsapp.tauri.png
+    sources:
+      - type: archive
+        url: https://github.com/SEU_USUARIO/whatsapp-tauri/releases/latest/download/whatsapp-tauri-x86_64.tar.gz
+        sha256: SUBSTITUIR_COM_SHA256_DO_RELEASE

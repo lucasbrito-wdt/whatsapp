@@ -1,0 +1,63 @@
+name: whatsapp-tauri
+base: core22
+version: "1.0.0"
+summary: WhatsApp Desktop for Linux
+description: |
+  Cliente WhatsApp para Linux construído com Tauri v2.
+  Carrega o WhatsApp Web em um WebView nativo com suporte completo
+  a áudio (chamadas, mensagens de voz) via PipeWire, system tray,
+  notificações de desktop e sessão persistente.
+
+grade: stable
+confinement: strict
+
+architectures:
+  - build-on: amd64
+
+apps:
+  whatsapp-tauri:
+    command: usr/bin/whatsapp-tauri
+    desktop: usr/share/applications/whatsapp-tauri.desktop
+    plugs:
+      - desktop
+      - desktop-legacy
+      - wayland
+      - x11
+      - opengl
+      - network
+      - network-bind
+      - audio-playback
+      - audio-record
+      - camera
+      - home
+      - removable-media
+      - pulseaudio
+
+parts:
+  whatsapp-tauri:
+    plugin: dump
+    source: .
+    source-type: local
+    override-build: |
+      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+      source "$HOME/.cargo/env"
+      npm install
+      npm run tauri build
+      cp src-tauri/target/release/whatsapp-tauri $SNAPCRAFT_PART_INSTALL/usr/bin/
+    build-packages:
+      - libwebkit2gtk-4.1-dev
+      - libssl-dev
+      - libayatana-appindicator3-dev
+      - librsvg2-dev
+      - patchelf
+      - libgstreamer1.0-dev
+      - gstreamer1.0-pipewire
+      - nodejs
+      - npm
+    stage-packages:
+      - libwebkit2gtk-4.1-0
+      - libssl3
+      - libayatana-appindicator3-1
+      - gstreamer1.0-pipewire
+      - gstreamer1.0-plugins-base
+      - gstreamer1.0-plugins-good
